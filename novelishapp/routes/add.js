@@ -17,6 +17,14 @@ router.post("/", function (req, res, next) {
     (err, client) => {
       if (err) return console.error(err);
       console.log("Connected to Database");
+      const db = client.db("novelishDatabase");
+      db.collection("reviews").insertOne({
+        userName: req.body.userName,
+        userEmail: req.body.userEmail,
+        bookName: req.body.bookName,
+        genre: req.body.bookGenre,
+        userReview: req.body.userReview,
+      });
     }
   );
   res.redirect("/");
