@@ -8,6 +8,8 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const genresRouter = require("./routes/genres");
 const addRouter = require("./routes/add");
+const reviewsRouter = require("./routes/reviews");
+const updateRouter = require("./routes/update");
 
 var app = express();
 
@@ -22,5 +24,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/genres", genresRouter);
 app.use("/add", addRouter);
+app.use("/reviews", reviewsRouter);
+app.use("/update", updateRouter);
 
 module.exports = app;
