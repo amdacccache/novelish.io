@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectId;
 const connectionKey = require("../mongoDBFolder/mongoDBInfo");
 const path = require("path");
 
@@ -18,7 +19,9 @@ router.post("/", function (req, res, next) {
       if (err) return console.error(err);
       console.log("Connected to Database");
       const db = client.db("novelishDatabase");
+      const newId = ObjectId();
       db.collection("reviews").insertOne({
+        _id: newId,
         userName: req.body.userName,
         userEmail: req.body.userEmail,
         bookName: req.body.bookName,
@@ -26,6 +29,9 @@ router.post("/", function (req, res, next) {
         genre: req.body.bookGenre,
         rating: req.body.rating,
         userReview: req.body.userReview,
+      });
+      db.collection(req.body.bookGenre).insertOne({
+        reviewID: newId,
       });
     }
   );
