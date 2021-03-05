@@ -22,7 +22,9 @@ router.put("/:id", function (req, res, next) {
             userName: req.body.userName,
             userEmail: req.body.userEmail,
             bookName: req.body.bookName,
+            authorName: req.body.authorName,
             genre: req.body.genre,
+            rating: req.body.rating,
             userReview: req.body.userReview,
           },
         }

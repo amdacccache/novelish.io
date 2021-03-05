@@ -10,8 +10,11 @@ updateForm.addEventListener("submit", function () {
       userName: updateFormData.get("userName"),
       userEmail: updateFormData.get("userEmail"),
       bookName: updateFormData.get("bookName"),
+      authorName: updateFormData.get("authorName"),
       genre: updateFormData.get("bookGenre"),
+      rating: updateFormData.get("rating"),
       userReview: updateFormData.get("userReview"),
     }),
   });
 });
+

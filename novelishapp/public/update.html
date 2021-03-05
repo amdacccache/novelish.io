@@ -79,19 +79,30 @@
               </div>
             </div>
             <div class="row">
-              <div class="col">
-                <label type="text" class="form-label" for="bookName"
-                  >Book</label
-                >
+              <div class="mb-3 col">
+                <label for="bookName" class="form-label">Book</label>
                 <input
                   type="text"
                   class="form-control"
                   id="bookName"
-                  name="bookName"
                   placeholder="Book"
+                  name="bookName"
                   required
                 />
               </div>
+              <div class="mb-3 col">
+                <label for="authorName" class="form-label">Author</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="authorName"
+                  name="authorName"
+                  placeholder="Author"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
               <div class="col">
                 <label for="bookGenre" class="form-label">Book Genre</label>
                 <select
@@ -112,6 +123,17 @@
                   <option value="other">Other</option>
                 </select>
               </div>
+              <div class="col">
+                <label for="rating" class="form-label"></label>
+                <ul class="rate-area">
+                  <input type="radio" id="5-star" name="rating" value="5 stars" /><label for="5-star" title="Amazing">5 stars</label>
+                  <input type="radio" id="4-star" name="rating" value="4 stars" /><label for="4-star" title="Good">4 stars</label>
+                  <input type="radio" id="3-star" name="rating" value="3 stars" /><label for="3-star" title="Average">3 stars</label>
+                  <input type="radio" id="2-star" name="rating" value="2 stars" /><label for="2-star" title="Not Good">2 stars</label>
+                  <input type="radio" id="1-star" name="rating" value="1 star" /><label for="1-star" title="Bad">1 star</label>
+                </ul>
+                </select>
+              </div>
             </div>
             <div class="mb-3">
               <label for="userReview" class="form-label">Your review!</label>
@@ -123,7 +145,7 @@
                 rows="4"
               ></textarea>
             </div>
-            <button class="btn btn-primary" type="submit" id="updateButton">
+            <button class="btn btn-primary" type="submit">
               Edit review!
             </button>
           </form>
