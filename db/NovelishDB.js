@@ -1,13 +1,14 @@
 const { MongoClient, ObjectId } = require("mongodb");
-const connectionKey = require("../mongoDBFolder/mongoDBInfo");
+require("dotenv").config();
 
 function NovelishDB() {
   const novDB = {};
 
-  const url = process.env.MONGO_URL || connectionKey;
+  const url = process.env.MONGO_URL;
   const DB_NAME = "novelishDatabase";
 
   novDB.getReviews = async function () {
+    console.log(url);
     let client;
     console.log("Getting reviews...");
     try {
