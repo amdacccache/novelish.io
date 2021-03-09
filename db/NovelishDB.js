@@ -47,6 +47,7 @@ function NovelishDB() {
   };
 
   novDB.getGenreReviews = async function (genreName) {
+    let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
       console.log("Connecting to novelish DB");
@@ -64,6 +65,7 @@ function NovelishDB() {
   };
 
   novDB.updateReview = async function (reviewID, reviewObj) {
+    let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
       console.log("connecting to Novelish DB");
@@ -98,6 +100,37 @@ function NovelishDB() {
     }
   };
 
+  novDB.createReview = async function (reviewInfoObj) {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("connecting to the novelish database");
+      await client.connect();
+      console.log("connected to the Db.");
+      const db = client.db(DB_NAME);
+      const reviewsCollection = db.collection("reviews");
+      const genreCollection = db.collection(reviewInfoObj.bookGenre);
+      const newId = ObjectId();
+      const results = await reviewsCollection.insertOne({
+        _id: newId,
+        userName: reviewInfoObj.userName,
+        userEmail: reviewInfoObj.userEmail,
+        bookName: reviewInfoObj.bookName,
+        authorName: reviewInfoObj.authorName,
+        genre: reviewInfoObj.bookGenre,
+        rating: reviewInfoObj.rating,
+        userReview: reviewInfoObj.userReview,
+      });
+      const secondResults = await genreCollection.insertOne({
+        reviewID: newId,
+      });
+      console.log(results);
+      console.log(secondResults);
+    } finally {
+      console.log("closing the connection");
+      client.close();
+    }
+  };
   return novDB;
 }
 

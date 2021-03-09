@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const MongoClient = require("mongodb").MongoClient;
-const connectionKey = require("../mongoDBFolder/mongoDBInfo");
 // const ObjectId = require("mongodb").ObjectId;
 const novDB = require("../db/NovelishDB");
 
@@ -36,7 +34,7 @@ router.put("/:id", function (req, res, next) {
   //     .catch((error) => console.error(error));
   // });
   novDB.updateReview(req.params.id, req.body);
-  res.send({ ok: true });
+  res.redirect("/");
 });
 
 module.exports = router;
