@@ -10,17 +10,6 @@ let imageObject = {
   graphicnovel: "graphic.png",
   other: "other.png",
 };
-/*
-<option selected>Genres</option>
-                  <option value="fiction">Fiction</option>
-                  <option value="nonfiction">Non-Fiction</option>
-                  <option value="romance">Romance</option>
-                  <option value="mystery">Mystery</option>
-                  <option value="classic">Classic</option>
-                  <option value="scifi">Sci-Fi</option>
-                  <option value="grahpicnovel">Graphic Novel</option>
-                  <option value="other">Other</option>
-*/
 
 async function getReviews() {
   const currentURL = window.location.origin + "/reviews";
@@ -34,9 +23,9 @@ async function getReviews() {
       newReview.innerHTML = `
         <div class="col-6"> 
           <div class="card mt-4">
-            <img src="http://${window.location.hostname}:${
-        window.location.port
-      }/images/${imageObject[review.genre]}"/>
+            <img src="${window.location.origin}/images/${
+        imageObject[review.genre]
+      }"/>
             <div class="card-body">
               <h2 class="card-title">${review.bookName}</h2>
               <h3 class=card-text">By: ${review.authorName}</h3>
@@ -57,7 +46,6 @@ async function getReviews() {
       reviewsContainer.appendChild(newReview);
     });
   });
-  console.log(reviewsArray);
 }
 
 getReviews();

@@ -1,7 +1,7 @@
 const updateForm = document.querySelector("#updateReviewForm");
-updateForm.addEventListener("submit", function () {
+updateForm.addEventListener("submit", async function (event) {
   const updateFormData = new FormData(updateForm);
-  fetch(`${window.location.href}`, {
+  const results = await fetch(`${window.location.href}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -16,5 +16,10 @@ updateForm.addEventListener("submit", function () {
       userReview: updateFormData.get("userReview"),
     }),
   });
+  event.preventDefault();
+  if (!results.ok) {
+    console.log("Error updating review!");
+  } else {
+    window.location = "/";
+  }
 });
-
