@@ -1,8 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const MongoClient = require("mongodb").MongoClient;
-const connectionString = require("../mongoDBFolder/mongoDBInfo");
-const ObjectId = require("mongodb").ObjectId;
 const novDB = require("../db/NovelishDB");
 
 router.get("/", async function (req, res) {
