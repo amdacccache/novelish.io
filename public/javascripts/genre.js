@@ -31,9 +31,7 @@ async function getGenreReviews() {
     newReview.innerHTML = `
         <div class="col-6"> 
           <div class="card mt-4">
-            <img src="http://${window.location.hostname}:${
-      window.location.port
-    }/images/${imageObject[genreReview.genre]}"/>
+            <img src="/images/${imageObject[genreReview.genre]}"/>
             <div class="card-body">
               <h2 class="card-title">${genreReview.bookName}</h2>
               <h3 class="card-text">Reviewer: ${genreReview.userName}</h3>

@@ -30,7 +30,7 @@ async function getReviews() {
               <h2 class="card-title">${review.bookName}</h2>
               <h3 class=card-text">By: ${review.authorName}</h3>
               <h4 class="card-text">Reviewer: ${review.userName}</h4>
-              <h4 class="card-text">${review.rating}</h4>
+              <h4 class="card-text staticRating">${review.rating}</h4>
               <p class="card-text">
               ${review.userReview}
               </p>

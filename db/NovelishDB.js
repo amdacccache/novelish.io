@@ -7,6 +7,7 @@ function NovelishDB() {
   const url = process.env.MONGO_URL;
   const DB_NAME = "novelishDatabase";
 
+  // get all of the reviews in the database
   novDB.getReviews = async function () {
     console.log(url);
     let client;
@@ -19,7 +20,10 @@ function NovelishDB() {
       const db = client.db(DB_NAME);
       const reviewsCollection = db.collection("reviews");
       console.log("Collection ready");
-      const reviews = await reviewsCollection.find().toArray();
+      const reviews = await reviewsCollection
+        .find()
+        .sort({ _id: -1 })
+        .toArray();
       return reviews;
     } finally {
       console.log("Closing database connection");
@@ -27,6 +31,7 @@ function NovelishDB() {
     }
   };
 
+  // get a single review
   novDB.getReview = async function (reviewID) {
     let client;
     try {
@@ -47,6 +52,7 @@ function NovelishDB() {
     }
   };
 
+  // Get reviews for a specific genre
   novDB.getGenreReviews = async function (genreName) {
     let client;
     try {
@@ -65,6 +71,7 @@ function NovelishDB() {
     }
   };
 
+  // UPDATE REVIEW FUNCTION
   novDB.updateReview = async function (reviewID, reviewObj) {
     let client;
     try {
@@ -101,6 +108,7 @@ function NovelishDB() {
     }
   };
 
+  // create a new review
   novDB.createReview = async function (reviewInfoObj) {
     let client;
     try {
@@ -134,5 +142,7 @@ function NovelishDB() {
   };
   return novDB;
 }
+
+// TODO: delete a review
 
 module.exports = NovelishDB();
