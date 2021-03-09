@@ -23,12 +23,10 @@ async function getReviews() {
       newReview.innerHTML = `
         <div class="col-6"> 
           <div class="card mt-4">
-            <img src="${window.location.origin}/images/${
-        imageObject[review.genre]
-      }"/>
+            <img src="/images/${imageObject[review.genre]}"/>
             <div class="card-body">
               <h2 class="card-title">${review.bookName}</h2>
-              <h3 class=card-text">By: ${review.authorName}</h3>
+              <h3 class=card-text">${review.authorName}</h3>
               <h4 class="card-text">Reviewer: ${review.userName}</h4>
               <h4 class="card-text staticRating">${review.rating}</h4>
               <p class="card-text">

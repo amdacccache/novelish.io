@@ -1,0 +1,9 @@
+.staticRating {
+  color: orange;
+  font-size: 4rem;
+}
+#novFooter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
