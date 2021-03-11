@@ -11,6 +11,8 @@ let imageObject = {
   graphicnovel: "graphic.png",
   other: "other.png",
 };
+let deleteButton;
+let reviewGenre;
 
 async function getReviews() {
   const reviewURL =
@@ -21,6 +23,7 @@ async function getReviews() {
   let response = await fetch(reviewURL, { method: "GET" });
   response.json().then(function (review) {
     reviewId = review._id;
+    reviewGenre = review.genre;
     let newReview = document.createElement("div");
     newReview.classList.add("row");
     newReview.classList.add("justify-content-center");
@@ -39,13 +42,30 @@ async function getReviews() {
               <a href="/update/${
                 review._id
               }" class="btn btn-warning">Edit Review</a>
-              <a href="/delete/${
-                review._id
-              }" class="btn btn-danger">Delete Review</a>
+              <button id="deleteButton" class="btn btn-danger">Delete Review</button>
             </div>
           </div>
       </div>`;
     reviewContainer.appendChild(newReview);
+    deleteButton = document.querySelector("#deleteButton");
+    deleteButton.addEventListener("click", deleteReview);
+  });
+}
+
+async function deleteReview() {
+  const reviewURL =
+    window.location.origin +
+    `/reviews/${window.location.href.substring(
+      window.location.href.lastIndexOf("/") + 1
+    )}`;
+  const response = await fetch(reviewURL, { method: "POST", 
+  headers: {
+    "Content-Type": "application/json",
+  }, body: JSON.stringify({reviewId: reviewId, reviewGenre: reviewGenre}) });
+  response.json().then(function (review) {
+    if (review.deleted == true) {
+      window.location.replace("/");
+    }
   });
 }
 
@@ -72,3 +92,4 @@ async function postComment(evt) {
 commentForm.addEventListener("submit", postComment);
 
 getReviews();
+deleteReview();

@@ -161,6 +161,30 @@ function NovelishDB() {
     }
   };
 
+  novDB.deleteReview = async function (reviewObject) {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("connecting to novelish database");
+      await client.connect();
+      console.log("Connected!");
+      const db = client.db(DB_NAME);
+      const reviewsCollection = db.collection("reviews");
+      const genreCollection = db.collection(reviewObject.reviewGenre);
+      const result = await reviewsCollection.deleteOne({
+        _id: new ObjectId(reviewObject.reviewId),
+      });
+      const secondResult = await genreCollection.deleteOne({
+        reviewID: new ObjectId(reviewObject.reviewId),
+      })
+      console.log(result);
+      console.log(secondResult);
+    } finally {
+      console.log("close connection");
+      client.close();
+    }
+  };
+
   return novDB;
 }
 

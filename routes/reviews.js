@@ -40,6 +40,17 @@ router.get("/:id", async function (req, res) {
   }
 });
 
+router.post("/:id", async function (req, res) {
+  console.log(req.body.reviewId);
+  try {
+    const deleteReview = await novDB.deleteReview(req.body);
+    console.log(deleteReview);
+    res.send({deleted:true});
+  } catch (e) {
+    res.send({deleted:false});
+  }
+});
+
 router.get("/genres/:id", async function (req, res) {
   // MongoClient.connect(connectionString, { useUnifiedTopology: true }).then(
   //   (client) => {

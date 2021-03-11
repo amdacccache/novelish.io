@@ -2,10 +2,15 @@
   color: orange;
   font-size: 4rem;
 }
+
 #novFooter {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+footer {
+  margin-top: 20px;
 }
 
 a {
