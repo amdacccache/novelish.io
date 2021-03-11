@@ -12,3 +12,8 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+#commentFormContainer {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
