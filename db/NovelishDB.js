@@ -1,4 +1,4 @@
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient, ObjectId, Db } = require("mongodb");
 require("dotenv").config();
 
 function NovelishDB() {
@@ -140,6 +140,27 @@ function NovelishDB() {
       client.close();
     }
   };
+
+  novDB.createComment = async function (commentObject) {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("connecting to the novelish database");
+      await client.connect();
+      console.log("connected to the DB");
+      const db = client.db(DB_NAME);
+      const commentsCollection = db.collection("comments");
+      const results = await commentsCollection.insertOne({
+        commenter: commentObject.commenterName,
+        comment: commentObject.comment,
+        reviewId: commentObject.reviewId,
+      });
+    } finally {
+      console.log("closing the connection");
+      client.close();
+    }
+  };
+
   return novDB;
 }
 

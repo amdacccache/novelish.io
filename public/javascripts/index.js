@@ -21,25 +21,21 @@ async function getReviews() {
       newReview.classList.add("row");
       newReview.classList.add("justify-content-center");
       newReview.innerHTML = `
-        <div class="col-6"> 
-          <div class="card mt-4">
-            <img src="/images/${imageObject[review.genre]}"/>
-            <div class="card-body">
-              <h2 class="card-title">${review.bookName}</h2>
-              <h3 class=card-text">${review.authorName}</h3>
-              <h4 class="card-text">Reviewer: ${review.userName}</h4>
-              <h4 class="card-text staticRating">${review.rating}</h4>
-              <p class="card-text">
-              ${review.userReview}
-              </p>
-              <a href="/update/${
-                review._id
-              }" class="btn btn-warning">Edit Review</a>
-              <a href="/delete/${
-                review._id
-              }" class="btn btn-danger">Delete Review</a>
+        <div class="col-6">
+          <a href="/review/${review._id}">
+            <div class="card mt-4">
+              <img src="/images/${imageObject[review.genre]}"/>
+              <div class="card-body">
+                <h2 class="card-title">${review.bookName}</h2>
+                <h3 class=card-text">${review.authorName}</h3>
+                <h4 class="card-text">Reviewer: ${review.userName}</h4>
+                <h4 class="card-text staticRating">${review.rating}</h4>
+                <p class="card-text">
+                ${review.userReview}
+                </p>
+              </div>
             </div>
-          </div>
+          </a>
       </div>`;
       reviewsContainer.appendChild(newReview);
     });
