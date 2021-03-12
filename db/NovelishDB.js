@@ -151,7 +151,7 @@ function NovelishDB() {
       const db = client.db(DB_NAME);
       const commentsCollection = db.collection("comments");
       const results = await commentsCollection.insertOne({
-        commenter: commentObject.commenterName,
+        commenter: commentObject.commenter,
         comment: commentObject.comment,
         reviewId: commentObject.reviewId,
       });
@@ -176,7 +176,7 @@ function NovelishDB() {
       });
       const secondResult = await genreCollection.deleteOne({
         reviewID: new ObjectId(reviewObject.reviewId),
-      })
+      });
       console.log(result);
       console.log(secondResult);
     } finally {
@@ -185,9 +185,46 @@ function NovelishDB() {
     }
   };
 
+  novDB.getComments = async function (reviewID) {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("connecting to novelish database");
+      await client.connect();
+      console.log("Connected!");
+      const db = client.db(DB_NAME);
+      const commentsCollection = db.collection("comments");
+      const comments = await commentsCollection
+        .find({ reviewId: reviewID })
+        .toArray();
+      return comments;
+    } finally {
+      console.log("close connection");
+      client.close();
+    }
+  };
+
+  novDB.deleteComment = async function (commentID) {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("connecting to novelish database");
+      await client.connect();
+      console.log("Connected!");
+      const db = client.db(DB_NAME);
+      const commentsCollection = db.collection("comments");
+      const result = await commentsCollection.deleteOne({
+        _id: new ObjectId(commentID),
+      });
+      console.log(result);
+      return { deleted: true };
+    } finally {
+      console.log("close connection");
+      client.close();
+    }
+  };
+
   return novDB;
 }
-
-// TODO: delete a review
 
 module.exports = NovelishDB();
