@@ -21,7 +21,7 @@ async function getReviews() {
       newReview.classList.add("row");
       newReview.classList.add("justify-content-center");
       newReview.innerHTML = `
-        <div class="col-6">
+        <div class="col-5">
           <a href="/review/${review._id}">
             <div class="card mt-4">
               <img src="/images/${imageObject[review.genre]}"/>
