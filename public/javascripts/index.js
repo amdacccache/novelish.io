@@ -1,4 +1,5 @@
 let reviewsContainer = document.querySelector("#reviewsContainer");
+let loadingTitle = document.querySelector("#loadingTitle");
 let reviewsArray = [];
 let imageObject = {
   fiction: "fiction.png",
@@ -15,6 +16,7 @@ async function getReviews() {
   const currentURL = window.location.origin + "/reviews";
   let response = await fetch(currentURL, { method: "GET" });
   response.json().then(function (results) {
+    loadingTitle.style.display = "none";
     results.forEach((review) => {
       reviewsArray.push(review);
       let newReview = document.createElement("div");

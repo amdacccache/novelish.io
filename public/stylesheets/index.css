@@ -3,3 +3,12 @@ body {
   background-repeat: repeat-y;
   height: 100%;
 }
+
+#loadingTitleText {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 30px;
+  display: inline-block;
+  font-size: 4rem;
+}
