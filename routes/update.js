@@ -8,7 +8,7 @@ router.get("/:id", function (req, res, next) {
   res.sendFile(path.join(__dirname, "/../public/update.html"));
 });
 
-router.put("/:id", function (req, res, next) {
+router.put("/:id", async function (req, res, next) {
   // let reviewID = new ObjectId(req.params.id);
   // MongoClient.connect(connectionKey, function (err, client) {
   //   if (err) throw err;
@@ -33,8 +33,9 @@ router.put("/:id", function (req, res, next) {
   //     })
   //     .catch((error) => console.error(error));
   // });
-  novDB.updateReview(req.params.id, req.body);
-  res.redirect("/");
+  console.log(req.params.id);
+  const databaseResult = await novDB.updateReview(req.params.id, req.body);
+  res.send({ result: databaseResult });
 });
 
 module.exports = router;

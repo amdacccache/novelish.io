@@ -1,4 +1,4 @@
-const { MongoClient, ObjectId, Db } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
 
 function NovelishDB() {
@@ -9,7 +9,6 @@ function NovelishDB() {
 
   // get all of the reviews in the database
   novDB.getReviews = async function () {
-    console.log(url);
     let client;
     console.log("Getting reviews...");
     try {
@@ -73,6 +72,7 @@ function NovelishDB() {
 
   // UPDATE REVIEW FUNCTION
   novDB.updateReview = async function (reviewID, reviewObj) {
+    let successfulDatabaseTransaction = false;
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -81,31 +81,41 @@ function NovelishDB() {
       console.log("Connected");
       const db = client.db(DB_NAME);
       const reviewsCollection = db.collection("reviews");
+      const oldGenreCollection = db.collection(reviewObj.oldGenre);
+      const newGenreCollection = db.collection(reviewObj.genre);
       console.log("collection ready.");
-      let results;
-      try {
-        results = await reviewsCollection.findOneAndUpdate(
-          { _id: ObjectId(reviewID) },
-          {
-            $set: {
-              userName: reviewObj.userName,
-              userEmail: reviewObj.userEmail,
-              bookName: reviewObj.bookName,
-              authorName: reviewObj.authorName,
-              genre: reviewObj.genre,
-              rating: reviewObj.rating,
-              userReview: reviewObj.userReview,
-            },
-          }
-        );
-      } catch (e) {
-        console.log(e);
-      }
+      let results, secondResult, thirdResult;
+      console.log(reviewObj.oldGenre);
+      results = await reviewsCollection.findOneAndUpdate(
+        { _id: ObjectId(reviewID) },
+        {
+          $set: {
+            userName: reviewObj.userName,
+            userEmail: reviewObj.userEmail,
+            bookName: reviewObj.bookName,
+            authorName: reviewObj.authorName,
+            genre: reviewObj.genre,
+            rating: reviewObj.rating,
+            userReview: reviewObj.userReview,
+          },
+        }
+      );
+
       console.log(results);
+      secondResult = await oldGenreCollection.findOneAndDelete({
+        reviewID: ObjectId(reviewID),
+      });
+      console.log(console.log(secondResult));
+      thirdResult = await newGenreCollection.insertOne({
+        reviewID: ObjectId(reviewID),
+      });
+      successfulDatabaseTransaction = true;
     } finally {
       console.log("closing database connection");
       client.close();
     }
+
+    return successfulDatabaseTransaction;
   };
 
   // create a new review

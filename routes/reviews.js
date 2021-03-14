@@ -14,7 +14,6 @@ router.get("/", async function (req, res) {
   //   }
   // );
   try {
-    console.log(novDB.getReviews);
     const reviews = await novDB.getReviews();
     res.send(reviews);
   } catch (e) {
@@ -45,9 +44,9 @@ router.post("/:id", async function (req, res) {
   try {
     const deleteReview = await novDB.deleteReview(req.body);
     console.log(deleteReview);
-    res.send({deleted:true});
+    res.send({ deleted: true });
   } catch (e) {
-    res.send({deleted:false});
+    res.send({ deleted: false });
   }
 });
 

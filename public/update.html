@@ -113,26 +113,54 @@
                   required
                 >
                   <option selected value="other">Genres</option>
-                  <option value="fiction">Fiction</option>
-                  <option value="nonfiction">Non-Fiction</option>
-                  <option value="romance">Romance</option>
-                  <option value="mystery">Mystery</option>
-                  <option value="classic">Classic</option>
-                  <option value="scifi">Sci-Fi</option>
-                  <option value="graphicnovel">Graphic Novel</option>
-                  <option value="other">Other</option>
+                  <option id="fictionOption" value="fiction">Fiction</option>
+                  <option id="nonfictionOption" value="nonfiction">
+                    Non-Fiction
+                  </option>
+                  <option id="romanceOption" value="romance">Romance</option>
+                  <option id="mysteryOption" value="mystery">Mystery</option>
+                  <option id="classicOption" value="classic">Classic</option>
+                  <option id="scifiOption" value="scifi">Sci-Fi</option>
+                  <option id="graphicnovelOption" value="graphicnovel">
+                    Graphic Novel
+                  </option>
+                  <option id="otherOption" value="other">Other</option>
                 </select>
               </div>
               <div class="col">
                 <label for="rating" class="form-label"></label>
                 <ul class="rate-area">
-                  <input type="radio" id="5-star" name="rating" value="★★★★★" /><label for="5-star" title="Amazing">5 stars</label>
-                  <input type="radio" id="4-star" name="rating" value="★★★★" /><label for="4-star" title="Good">4 stars</label>
-                  <input type="radio" id="3-star" name="rating" value="★★★" /><label for="3-star" title="Average">3 stars</label>
-                  <input type="radio" id="2-star" name="rating" value="★★" /><label for="2-star" title="Not Good">2 stars</label>
-                  <input type="radio" id="1-star" name="rating" value="★" /><label for="1-star" title="Bad">1 star</label>
+                  <input
+                    type="radio"
+                    id="fiveStar"
+                    name="rating"
+                    value="★★★★★"
+                  /><label for="fiveStar" title="Amazing">5 stars</label>
+                  <input
+                    type="radio"
+                    id="fourStar"
+                    name="rating"
+                    value="★★★★"
+                  /><label for="fourStar" title="Good">4 stars</label>
+                  <input
+                    type="radio"
+                    id="threeStar"
+                    name="rating"
+                    value="★★★"
+                  /><label for="threeStar" title="Average">3 stars</label>
+                  <input
+                    type="radio"
+                    id="twoStar"
+                    name="rating"
+                    value="★★"
+                  /><label for="twoStar" title="Not Good">2 stars</label>
+                  <input
+                    type="radio"
+                    id="oneStar"
+                    name="rating"
+                    value="★"
+                  /><label for="oneStar" title="Bad">1 star</label>
                 </ul>
-                </select>
               </div>
             </div>
             <div class="mb-3">
@@ -145,10 +173,13 @@
                 rows="4"
               ></textarea>
             </div>
-            <button class="btn btn-primary" type="submit">
-              Edit review!
-            </button>
+            <button class="btn btn-primary" type="submit">Edit review!</button>
           </form>
+        </div>
+        <div class="container">
+          <div class="alert alert-danger" id="dangerAlert" role="alert">
+            Unable to update review :( Please try again.
+          </div>
         </div>
       </section>
     </main>
