@@ -35,7 +35,7 @@ async function getGenreReviews() {
       `${window.location.origin}/reviews/${review.reviewID}`
     );
     const genreReview = await rawData.json();
-    genreTitle.textContent = `${titleObject[genreReview.genre]}`;
+    genreTitle.textContent = `${titleObject[genreReview.genre]} Books`;
     let newReview = document.createElement("div");
     newReview.classList.add("row");
     newReview.classList.add("justify-content-center");

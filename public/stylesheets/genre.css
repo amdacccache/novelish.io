@@ -7,3 +7,11 @@ body {
   background-repeat: repeat-y;
   height: 100%;
 }
+
+h1{
+  background-color:white;
+  color: black;
+  padding: 10px;
+  border-radius: 30px;
+  display: inline-block;
+}
