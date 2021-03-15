@@ -23,6 +23,7 @@ npm install
 npm run start
 ```
 in order to download the dev tools and packages used in this application. We used Prettier to format this code and the project was linted with ESLint.
+In order to get the MongoDB working, create a ".env" file in your project folder. Create a variable in the .env file called MONGO_URL and set it equal to your Mongo connection string.
 
 ## Folders
 
