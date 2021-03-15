@@ -10,7 +10,7 @@ let imageObject = {
   graphicnovel: "graphic.png",
   other: "other.png",
 };
-async function getGenreReviews() {
+async function getSearchReviews() {
   const rawData = await fetch(
     `../reviews/search/${window.location.href.substring(
       window.location.href.lastIndexOf("/") + 1
@@ -20,10 +20,10 @@ async function getGenreReviews() {
     }
   );
   const parsedData = await rawData.json();
-  searchTitle.textContent = `Search results for: ${window.location.href
+  let searchQueryString = window.location.href
     .substring(window.location.href.lastIndexOf("/") + 1)
-    .replace("_", " ")}`;
-  console.log(parsedData);
+    .replaceAll("%20", " ");
+  searchTitle.textContent = `Search results for: ${searchQueryString}`;
   parsedData.forEach((review) => {
     let newReview = document.createElement("div");
     newReview.classList.add("row");
@@ -48,4 +48,4 @@ async function getGenreReviews() {
     reviewsContainer.appendChild(newReview);
   });
 }
-getGenreReviews();
+getSearchReviews();

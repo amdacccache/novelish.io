@@ -47,6 +47,7 @@ router.get("/search/:query", async function (req, res) {
     console.log(reviews);
     res.send(reviews);
   } catch (e) {
+    console.log(e);
     console.log("Error searching for that query");
   }
 });

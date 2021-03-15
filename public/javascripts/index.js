@@ -47,7 +47,8 @@ searchForm.addEventListener("submit", async function (evt) {
   evt.preventDefault();
   const searchFormData = new FormData(searchForm);
   const searchQuery = searchFormData.get("searchQuery");
-  const formatedSearchQuery = searchQuery.replace(" ", "_");
+  console.log(searchQuery);
+  const formatedSearchQuery = searchQuery.replaceAll(" ", "%20");
   window.location.replace(`/search/${formatedSearchQuery}`);
 });
 
