@@ -15,9 +15,25 @@ Website for project 2 in [CS5610 Web Development](https://johnguerra.co/classes/
 ![Single Review page](public/images/singleReview1.png)
 ![](public/images/singleReview2.png)
 
-## How to Start 
+## How to Start
+
+Download or clone this repository. Then in your terminal use: 
+```
+npm install
+npm run start
+```
+in order to download the dev tools and packages used in this application. We used Prettier to format this code and the project was linted with ESLint.
 
 ## Folders
+
+- Public: contains the HTML files and several other folders
+    - images: holds the card images, tab icon, and README screenshots
+    - javascripts: contains the js files
+    - stylesheets: contains the CSS stylesheets for their respective HTML files
+- Routes: contains the js files that run the express routing to handle the URIs reponse to client requests
+- db: contains a js folder that connects the functionality established in the routes to respective collections in MongoDB
+
+## Licensing
 
 > You can check out the full license [here](/LICENSE)
 
