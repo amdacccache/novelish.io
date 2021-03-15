@@ -10,16 +10,6 @@ let imageObject = {
   graphicnovel: "graphic.png",
   other: "other.png",
 };
-let titleObject = {
-  fiction: "Fiction",
-  nonfiction: "Non-Fiction",
-  romance: "Romance",
-  mystery: "Mystery",
-  classic: "Classics",
-  scifi: "Science Fiction",
-  graphicnovel: "Graphic Novels",
-  other: "Other",
-};
 async function getGenreReviews() {
   const rawData = await fetch(
     `../reviews/search/${window.location.href.substring(

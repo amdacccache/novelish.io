@@ -65,7 +65,11 @@ updateForm.addEventListener("submit", async function (event) {
   });
   const succesfulDatabaseTransaction = await results.json();
   if (succesfulDatabaseTransaction) {
-    window.location.replace("/");
+    window.location.replace(
+      `/review/${window.location.href.substring(
+        window.location.href.lastIndexOf("/") + 1
+      )}`
+    );
   } else {
     unsuccessfulAlert.style.display = "block";
   }

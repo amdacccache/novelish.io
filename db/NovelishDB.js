@@ -91,6 +91,7 @@ function NovelishDB() {
       await client.connect();
       console.log("Connected");
       const db = client.db(DB_NAME);
+      console.log(genreName);
       const reviewsCollection = db.collection(genreName);
       console.log("Collection ready");
       const reviews = await reviewsCollection.find().toArray();
@@ -131,15 +132,15 @@ function NovelishDB() {
           },
         }
       );
-
       console.log(results);
       secondResult = await oldGenreCollection.findOneAndDelete({
         reviewID: ObjectId(reviewID),
       });
-      console.log(console.log(secondResult));
+      console.log(secondResult);
       thirdResult = await newGenreCollection.insertOne({
         reviewID: ObjectId(reviewID),
       });
+      console.log(thirdResult);
       successfulDatabaseTransaction = true;
     } finally {
       console.log("closing database connection");
@@ -196,6 +197,7 @@ function NovelishDB() {
         comment: commentObject.comment,
         reviewId: commentObject.reviewId,
       });
+      console.log(results);
     } finally {
       console.log("closing the connection");
       client.close();
@@ -261,6 +263,31 @@ function NovelishDB() {
       return { deleted: true };
     } finally {
       console.log("close connection");
+      client.close();
+    }
+  };
+
+  novDB.updateComment = async function (commentID, commentObject) {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("connecting to novelish database");
+      await client.connect();
+      console.log("Connected!");
+      const db = client.db(DB_NAME);
+      const commentsCollection = db.collection("comments");
+      const result = await commentsCollection.findOneAndUpdate(
+        { _id: ObjectId(commentID) },
+        {
+          $set: {
+            comment: commentObject.comment,
+          },
+        }
+      );
+      console.log(result);
+      return { updated: true };
+    } finally {
+      console.log("Closing update comment connection");
       client.close();
     }
   };
