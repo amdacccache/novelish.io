@@ -89,9 +89,12 @@ async function postComment(evt) {
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
   const parsedResponse = await response.json();
-  console.log(parsedResponse);
-  commentForm.reset();
-  reloadComments();
+  if (parsedResponse != null) {
+    commentForm.reset();
+    reloadComments();
+  } else {
+    console.log("Error posting comment!");
+  }
 }
 
 async function reloadComments() {
@@ -99,7 +102,6 @@ async function reloadComments() {
   const response = await fetch(`/comments/${reviewId}`, { method: "GET" });
   response.json().then(function (comments) {
     comments.forEach((comment) => {
-      console.log(comment);
       renderComment(comment);
     });
   });

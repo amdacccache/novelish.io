@@ -22,14 +22,12 @@ let titleObject = {
 };
 async function getGenreReviews() {
   const rawData = await fetch(
-    // `${window.location.protocol}//${window.location.hostname}:${window.location.port}/reviews${window.location.pathname}`,
     `${window.location.origin}/reviews/${window.location.pathname}`,
     {
       method: "GET",
     }
   );
   const parsedData = await rawData.json();
-  console.log(parsedData);
   if (parsedData.length == 0) {
     genreTitle.textContent = "No Reviews Yet!";
   }
@@ -38,7 +36,7 @@ async function getGenreReviews() {
       `${window.location.origin}/reviews/${review.reviewID}`
     );
     const genreReview = await rawData.json();
-    genreTitle.textContent = `${titleObject[genreReview.genre]} Books`;
+    genreTitle.textContent = `${titleObject[genreReview.genre]}`;
     let newReview = document.createElement("div");
     newReview.classList.add("row");
     newReview.classList.add("justify-content-center");
