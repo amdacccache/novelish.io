@@ -15,6 +15,8 @@ Website for project 2 in [CS5610 Web Development](https://johnguerra.co/classes/
 ![Single Review page](public/images/singleReview1.png)
 ![](public/images/singleReview2.png)
 
+> The background image was sourced from [here](https://d33wubrfki0l68.cloudfront.net/7ae0f1087ad7b580adbe96cae82d2653f044f3a0/f4a3c/marketing_site/images/bookstack.png).
+
 ## How to Start
 
 Download or clone this repository. Then in your terminal use: 
