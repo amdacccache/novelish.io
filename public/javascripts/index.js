@@ -1,5 +1,5 @@
 let reviewsContainer = document.querySelector("#reviewsContainer");
-let loadingTitle = document.querySelector("#loadingTitle");
+let loadingTitle = document.querySelector("#loadingTitleText");
 let searchForm = document.querySelector("#searchForm");
 let imageObject = {
   fiction: "fiction.png",
@@ -16,7 +16,11 @@ async function getReviews() {
   const currentURL = window.location.origin + "/reviews";
   let response = await fetch(currentURL, { method: "GET" });
   response.json().then(function (results) {
-    loadingTitle.style.display = "none";
+    if (results.length == 0) {
+      loadingTitle.textContent = "No Reviews Yet!";
+    } else {
+      loadingTitle.style.display = "none";
+    }
     results.forEach((review) => {
       let newReview = document.createElement("div");
       newReview.classList.add("row");
@@ -47,7 +51,6 @@ searchForm.addEventListener("submit", async function (evt) {
   evt.preventDefault();
   const searchFormData = new FormData(searchForm);
   const searchQuery = searchFormData.get("searchQuery");
-  console.log(searchQuery);
   const formatedSearchQuery = searchQuery.replaceAll(" ", "%20");
   window.location.replace(`/search/${formatedSearchQuery}`);
 });

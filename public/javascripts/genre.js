@@ -30,6 +30,9 @@ async function getGenreReviews() {
   );
   const parsedData = await rawData.json();
   console.log(parsedData);
+  if (parsedData.length == 0) {
+    genreTitle.textContent = "No Reviews Yet!";
+  }
   parsedData.forEach(async (review) => {
     const rawData = await fetch(
       `${window.location.origin}/reviews/${review.reviewID}`
