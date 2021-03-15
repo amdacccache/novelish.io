@@ -1,6 +1,5 @@
 let reviewsContainer = document.querySelector("#reviewsContainer");
 let loadingTitle = document.querySelector("#loadingTitle");
-let reviewsArray = [];
 let imageObject = {
   fiction: "fiction.png",
   nonfiction: "nonfic.png",
@@ -18,7 +17,6 @@ async function getReviews() {
   response.json().then(function (results) {
     loadingTitle.style.display = "none";
     results.forEach((review) => {
-      reviewsArray.push(review);
       let newReview = document.createElement("div");
       newReview.classList.add("row");
       newReview.classList.add("justify-content-center");

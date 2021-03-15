@@ -3,16 +3,6 @@ const router = express.Router();
 const novDB = require("../db/NovelishDB");
 
 router.get("/", async function (req, res) {
-  // MongoClient.connect(connectionString, { useUnifiedTopology: true }).then(
-  //   (client) => {
-  //     console.log("Connected to Database");
-  //     let db = client.db("novelishDatabase");
-  //     db.collection("reviews")
-  //       .find()
-  //       .toArray()
-  //       .then((results) => res.send(results));
-  //   }
-  // );
   try {
     const reviews = await novDB.getReviews();
     res.send(reviews);
@@ -22,15 +12,6 @@ router.get("/", async function (req, res) {
 });
 
 router.get("/:id", async function (req, res) {
-  // MongoClient.connect(connectionString, { useUnifiedTopology: true }).then(
-  //   (client) => {
-  //     console.log("Connected to the database");
-  //     let db = client.db("novelishDatabase");
-  //     db.collection("reviews")
-  //       .findOne({ _id: ObjectId(req.params.id) })
-  //       .then((results) => res.send(results));
-  //   }
-  // );
   try {
     const review = await novDB.getReview(req.params.id);
     res.send(review);
@@ -51,22 +32,22 @@ router.post("/:id", async function (req, res) {
 });
 
 router.get("/genres/:id", async function (req, res) {
-  // MongoClient.connect(connectionString, { useUnifiedTopology: true }).then(
-  //   (client) => {
-  //     console.log("Connected to Database");
-  //     let db = client.db("novelishDatabase");
-  //     db.collection(req.params.id)
-  //       .find()
-  //       .toArray()
-  //       .then((results) => res.send(results));
-  //   }
-  // );
-
   try {
     const reviews = await novDB.getGenreReviews(req.params.id);
     res.send(reviews);
   } catch (e) {
     console.log("Error getting genre reviews.");
+  }
+});
+
+router.get("/search/:query", async function (req, res) {
+  try {
+    console.log(req.params.query);
+    const reviews = await novDB.searchAndGetReviews(req.params.query);
+    console.log(reviews);
+    res.send(reviews);
+  } catch (e) {
+    console.log("Error searching for that query");
   }
 });
 

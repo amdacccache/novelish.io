@@ -30,6 +30,36 @@ function NovelishDB() {
     }
   };
 
+  novDB.searchAndGetReviews = async function (query) {
+    let client;
+    console.log("Search and retrieving reviews...");
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      console.log("Connecting to novelish DB");
+      await client.connect();
+      console.log("Connected");
+      const db = client.db(DB_NAME);
+      const reviewsCollection = db.collection("reviews");
+      console.log("Collection ready");
+      console.log(query);
+      const reviews = await reviewsCollection
+        .find({
+          $or: [
+            { userName: query },
+            { bookName: query },
+            { genre: query },
+            { userReview: query },
+          ],
+        })
+        .sort({ _id: -1 })
+        .toArray();
+      return reviews;
+    } finally {
+      console.log("Closing database connection");
+      client.close();
+    }
+  };
+
   // get a single review
   novDB.getReview = async function (reviewID) {
     let client;
