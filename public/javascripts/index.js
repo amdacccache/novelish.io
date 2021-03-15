@@ -1,5 +1,6 @@
 let reviewsContainer = document.querySelector("#reviewsContainer");
 let loadingTitle = document.querySelector("#loadingTitle");
+let searchForm = document.querySelector("#searchForm");
 let imageObject = {
   fiction: "fiction.png",
   nonfiction: "nonfic.png",
@@ -41,5 +42,13 @@ async function getReviews() {
     });
   });
 }
+
+searchForm.addEventListener("submit", async function (evt) {
+  evt.preventDefault();
+  const searchFormData = new FormData(searchForm);
+  const searchQuery = searchFormData.get("searchQuery");
+  const formatedSearchQuery = searchQuery.replace(" ", "_");
+  window.location.replace(`/search/${formatedSearchQuery}`);
+});
 
 getReviews();

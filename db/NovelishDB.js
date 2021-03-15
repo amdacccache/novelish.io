@@ -31,6 +31,7 @@ function NovelishDB() {
   };
 
   novDB.searchAndGetReviews = async function (query) {
+    const parsedQuery = query.replace("_", " ");
     let client;
     console.log("Search and retrieving reviews...");
     try {
@@ -41,14 +42,14 @@ function NovelishDB() {
       const db = client.db(DB_NAME);
       const reviewsCollection = db.collection("reviews");
       console.log("Collection ready");
-      console.log(query);
       const reviews = await reviewsCollection
         .find({
           $or: [
-            { userName: query },
-            { bookName: query },
-            { genre: query },
-            { userReview: query },
+            { userName: parsedQuery },
+            { authorName: parsedQuery },
+            { bookName: parsedQuery },
+            { genre: parsedQuery },
+            { userReview: parsedQuery },
           ],
         })
         .sort({ _id: -1 })

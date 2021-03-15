@@ -40,14 +40,20 @@
               <a class="nav-link" href="/add">Review a Book</a>
             </li>
           </ul>
-          <form class="d-flex">
+          <form class="d-flex" id="searchForm">
             <input
               class="form-control me-2"
               type="search"
+              name="searchQuery"
               placeholder="Search"
               aria-label="Search"
+              required
             />
-            <button class="btn btn-outline-success" type="submit">
+            <button
+              class="btn btn-outline-success"
+              id="searchSubmit"
+              type="submit"
+            >
               Search
             </button>
           </form>

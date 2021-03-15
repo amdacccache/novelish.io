@@ -30,9 +30,9 @@ async function getGenreReviews() {
     }
   );
   const parsedData = await rawData.json();
-  searchTitle.textContent = `Search results for: ${window.location.href.substring(
-    window.location.href.lastIndexOf("/") + 1
-  )}`;
+  searchTitle.textContent = `Search results for: ${window.location.href
+    .substring(window.location.href.lastIndexOf("/") + 1)
+    .replace("_", " ")}`;
   console.log(parsedData);
   parsedData.forEach((review) => {
     let newReview = document.createElement("div");
