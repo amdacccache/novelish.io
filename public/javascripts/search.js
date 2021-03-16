@@ -24,6 +24,9 @@ async function getSearchReviews() {
     .substring(window.location.href.lastIndexOf("/") + 1)
     .replaceAll("%20", " ");
   searchTitle.textContent = `Search results for: ${searchQueryString}`;
+  if (parsedData.length == 0) {
+    reviewsContainer.innerHTML = "<h3>No search results found!</h3>";
+  }
   parsedData.forEach((review) => {
     let newReview = document.createElement("div");
     newReview.classList.add("row");

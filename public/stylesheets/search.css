@@ -16,3 +16,12 @@ h1 {
   border-radius: 30px;
   display: inline-block;
 }
+
+h3 {
+  margin-top: 1.25rem;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 30px;
+  display: inline-block;
+}

@@ -32,7 +32,6 @@ function NovelishDB() {
 
   novDB.searchAndGetReviews = async function (query) {
     const parsedQuery = query;
-    console.log(parsedQuery);
     let client;
     console.log("Search and retrieving reviews...");
     try {
