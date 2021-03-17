@@ -1,3 +1,15 @@
+/*
+* Haoyang Ding => Nabil:
+*
+* Your code style is great. I need to learn how you name variables and functions
+* It seems that you write a lot of code, the 'windows.location' things. Actually I think a relative url will work.
+* But since I don't have your db url, I can't try it on your project.
+* And for the space issue, you want to change it to %20. There are several methods called escape(), encodeURI(), encodeURIComponent()
+* Maybe these functions would help.
+*
+* */
+
+
 let reviewsContainer = document.querySelector("#reviewsContainer");
 let genreTitle = document.querySelector("#genreTitle");
 let imageObject = {
